@@ -4,3 +4,36 @@
 *.suo
 *.userosscache
 *.sln.docstates
+
+## Build results
+bin/
+obj/
+
+## NuGet
+*.nupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+
+## ASP.NET specific
+project.json.lock
+wwwroot/lib/
+
+## Logs
+*.log
+
+## Config
+appsettings.*.json
+
+## OS
+Thumbs.db
+Desktop.ini
+
+## IDE
+.idea/
+*.DS_Store
+
+## Node (se usi npm o frontend tools)
+node_modules/
+npm-debug.log
+yarn-error.log
