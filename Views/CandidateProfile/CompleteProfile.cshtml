@@ -1,0 +1,53 @@
+﻿@model JobBoard.Models.CandidateProfile
+@{
+    ViewData["Title"] = "Complete your profile";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="CompleteProfile" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Surname" class="form-label"></label>
+        <input asp-for="Surname" class="form-control" />
+        <span asp-validation-for="Surname" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Telephone" class="form-label"></label>
+        <input asp-for="Telephone" class="form-control" />
+        <span asp-validation-for="Telephone" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+
+        <label class="form-label">Upload your CV (PDF only)</label>
+        <input class="form-control" type="file" name="cvFile" accept=".pdf" />
+
+
+
+        @if (ViewData.ModelState.ContainsKey("cvFile") && ViewData.ModelState["cvFile"]?.Errors.Count > 0)
+        {
+            <span class="text-danger">@ViewData.ModelState["cvFile"].Errors[0].ErrorMessage</span>
+        }
+    </div>
+    <div class="form-check mb-3">
+        <input asp-for="AcceptPrivacyPolicy" class="form-check-input" />
+        <label asp-for="AcceptPrivacyPolicy" class="form-check-label"></label>
+        <span asp-validation-for="AcceptPrivacyPolicy" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

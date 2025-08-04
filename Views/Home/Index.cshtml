@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using JobBoard.Areas.Identity.Data;
+@inject UserManager<JobBoardUser> UserManager
+
+@{
+    ViewData["Title"] = "Welcome to JobBoard";
+    var currentUser = await UserManager.GetUserAsync(User);
+}
+
+<div class="container py-5">
+    <div class="text-center">
+
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <h1 class="display-4 text-primary">Welcome to JobBoard</h1>
+            <p class="lead">The platform where candidates and recruiters meet.</p>
+            <p class="mt-4 text-muted">Log in or register to start your JobBoard experience.</p>
+        }
+        /*else if (User.IsInRole("ADMIN"))
+        {
+            <h1 class="display-5">Admin Dashboard</h1>
+            <p class="lead">Manage the platform</p>
+            <a class="btn btn-warning btn-lg mt-3" asp-controller="Admin" asp-action="PendingRecruiters">
+                View Pending Recruiters
+            </a>
+        }*/
+        else if (User.IsInRole("RECRUITER"))
+        {
+            <h1 class="display-5">Recruiter Area</h1>
+
+            @if (currentUser != null && !currentUser.IsApprovedRecruiter)
+            {
+                <div class="alert alert-warning mt-4">
+                    <strong>Your profile is under review.</strong> You will be able to post job offers once your account is approved.
+                </div>
+            }
+            else
+            {
+                <p class="mt-4">
+                    <a class="btn btn-success btn-lg" asp-controller="Job" asp-action="Create">Create an ad</a>
+                    <a class="btn btn-outline-secondary btn-lg" asp-controller="Job" asp-action="Index">Manage Ads</a>
+                </p>
+            }
+        }
+        else if (User.IsInRole("CANDIDATE"))
+        {
+            <h1 class="display-5">Candidate Area</h1>
+            <p class="mt-4">
+                <a class="btn btn-info btn-lg" asp-controller="Job" asp-action="IndexForCandidate">Browse Job Offers</a>
+            </p>
+        }
+    </div>
+</div>

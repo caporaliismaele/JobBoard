@@ -1,0 +1,34 @@
+﻿@model List<JobBoard.Models.Candidature>
+
+<h2>Applicants</h2>
+
+@if (Model.Count == 0)
+{
+    <p>No candidates have applied for this job offer.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>CV</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Candidate.Name @item.Candidate.Surname</td>
+                    <td>@item.Candidate.Email</td>
+                    <td>@item.Candidate.Telephone</td>
+                    <td>
+                        <a href="~/uploads/Candidate/@item.Candidate.CvFileName" target="_blank">Download CV</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

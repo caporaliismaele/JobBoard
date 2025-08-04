@@ -1,0 +1,40 @@
+﻿@model List<JobBoard.Models.Candidature>
+
+@{
+    ViewData["Title"] = "My Applications";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        You haven't applied to any job offers yet.
+    </div>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Job Title</th>
+                <th>Position</th>
+                <th>Company</th>
+                <th>Location</th>
+                <th>Applied At</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var app in Model)
+            {
+                <tr>
+                    <td>@app.JobOffer.Title</td>
+                    <td>@app.JobOffer.Position</td>
+                    <td>@app.JobOffer.Company</td>
+                    <td>@app.JobOffer.Location</td>
+                    <td>@app.ApplicationDate.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

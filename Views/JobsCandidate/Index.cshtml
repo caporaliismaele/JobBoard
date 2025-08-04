@@ -1,0 +1,92 @@
+﻿@model List<JobBoard.Models.JobOffer>
+@{
+    ViewData["Title"] = "Available Job Offers";
+    var selected = ViewBag.SelectedOffer as JobBoard.Models.JobOffer;
+}
+
+<div class="container mt-4">
+
+    <form asp-action="IndexForCandidate" asp-controller="Job" method="get" class="mb-4 row g-3">
+        <div class="col-md-5">
+            <input type="text" name="position" class="form-control" placeholder="Search by position..." value="@Context.Request.Query["position"]" />
+        </div>
+        <div class="col-md-5">
+            <input type="text" name="location" class="form-control" placeholder="Search by location..." value="@Context.Request.Query["location"]" />
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Search</button>
+        </div>
+    </form>
+
+    @if (Model.Count>0)
+    {
+        <h2 class="mb-4">Available Job Offers</h2>
+        <div class="row">
+            <!-- Left column: List of offers -->
+            <div class="col-md-5" style="max-height: 600px; overflow-y: auto;">
+                @foreach (var offer in Model)
+                {
+                    <a asp-controller="Job" asp-action="IndexForCandidate" asp-route-selectedId="@offer.Id" asp-route-position="@Context.Request.Query["position"]"
+                       asp-route-location="@Context.Request.Query["location"]" class="text-decoration-none text-dark">
+                        <div class="card mb-2 @(selected?.Id == offer.Id ? "border-primary shadow" : "")" style="cursor: pointer;">
+                            <div class="card-body">
+                                <h5 class="card-title">@offer.Title</h5>
+                                <p class="card-text text-muted">
+                                    @offer.Company – @offer.Location<br />
+                                    <strong>@offer.Position</strong><br />
+
+                                </p>
+                                <p class="card-text">
+                                    @(offer.Description.Length > 100 ? offer.Description.Substring(0, 100) + "..." : offer.Description)
+                                </p>
+                                <p class="card-text text-muted">
+                                    <small>@offer.PublishedDate.ToShortDateString()</small>
+                                </p>
+
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+
+
+            <!-- Right column: Details -->
+            <div class="col-md-7">
+                @if (selected != null)
+                {
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>@selected.Title</h3>
+                            <p class="text-muted">@selected.Company – @selected.Location</p>
+                            <p><strong>Role:</strong> @selected.Position</p>
+                            <p>@selected.Description</p>
+
+                            @if (!(ViewBag.AlreadyApplied ?? false))
+                            {
+                                <form method="post" asp-controller="Job" asp-action="Apply" asp-route-jobId="@selected.Id">
+                                    <button type="submit" class="btn btn-success">Apply</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <div class="alert alert-info">You have already applied for this job.</div>
+                            }
+
+
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <p>Select a job offer to see the details.</p>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <h2 class="mb-4">No offers found</h2>
+    }
+
+
+</div>

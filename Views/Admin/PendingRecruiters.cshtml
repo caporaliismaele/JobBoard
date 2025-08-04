@@ -1,0 +1,86 @@
+﻿@model IEnumerable<JobBoard.Models.RecruiterProfile>
+
+@{
+    ViewData["Title"] = "Pending Recruiters";
+}
+
+<h2>Pending Recruiters</h2>
+
+@if (!Model.Any())
+{
+    <p>No recruiters pending approval.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Company</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Vat Number</th>
+                <th>Identity Document</th>
+                <th>Company Certificate</th>
+                <th>VAT Certificate</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var recruiter in Model)
+            {
+                <tr>
+                    <td>@recruiter.CompanyName</td>
+                    <td>@recruiter.CompanyEmail</td>
+                    <td>@recruiter.Phone</td>
+                    <td>@recruiter.VatNumber</td>
+
+                    <td>
+                        @if (!string.IsNullOrEmpty(recruiter.IdentityDocumentPath))
+                        {
+                            <a href="@Url.Content($"~/{recruiter.IdentityDocumentPath}")" target="_blank">View</a>
+                        }
+                        else
+                        {
+                            <span class="text-muted">Not uploaded</span>
+                        }
+                    </td>
+
+                    <td>
+                        @if (!string.IsNullOrEmpty(recruiter.CompanyCertificatePath))
+                        {
+                            <a href="@Url.Content($"~/{recruiter.CompanyCertificatePath}")" target="_blank">View</a>
+                        }
+                        else
+                        {
+                            <span class="text-muted">Not uploaded</span>
+                        }
+                    </td>
+
+                    <td>
+                        @if (!string.IsNullOrEmpty(recruiter.VatCertificatePath))
+                        {
+                            <a href="@Url.Content($"~/{recruiter.VatCertificatePath}")" target="_blank">View</a>
+                        }
+                        else
+                        {
+                            <span class="text-muted">Not uploaded</span>
+                        }
+                    </td>
+
+                    <td>
+                        <form asp-controller="Admin" asp-action="Approve" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@recruiter.UserId" />
+                            <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                        </form>
+
+
+                        <form asp-controller="Admin" asp-action="Reject" method="post" style="display:inline; margin-left: 5px;">
+                            <input type="hidden" name="id" value="@recruiter.UserId" />
+                            <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

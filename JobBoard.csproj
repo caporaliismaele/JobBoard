@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-JobBoard-c9581f29-4940-4080-a07a-715424e9b449</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Nuova cartella1\**" />
+    <Compile Remove="Nuova cartella\**" />
+    <Compile Remove="Views\Nuova cartella3\**" />
+    <Content Remove="Nuova cartella1\**" />
+    <Content Remove="Nuova cartella\**" />
+    <Content Remove="Views\Nuova cartella3\**" />
+    <EmbeddedResource Remove="Nuova cartella1\**" />
+    <EmbeddedResource Remove="Nuova cartella\**" />
+    <EmbeddedResource Remove="Views\Nuova cartella3\**" />
+    <None Remove="Nuova cartella1\**" />
+    <None Remove="Nuova cartella\**" />
+    <None Remove="Views\Nuova cartella3\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\JobOfferController.cs" />
+    <Compile Remove="Models\Class.cs" />
+    <Compile Remove="Views\CandidateProfile\Index.cshtml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\JobsCandidate\Details.cshtml" />
+    <Content Remove="Views\JobsRecruiter\Details.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.18" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.18" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.18" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.18" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.18" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Nuova cartella1\" />
+    <Folder Include="Views\Nuova cartella\" />
+    <Folder Include="wwwroot\uploads\Candidate" />
+  </ItemGroup>
+
+</Project>

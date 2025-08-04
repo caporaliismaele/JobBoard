@@ -1,0 +1,50 @@
+﻿@model IEnumerable<JobBoard.Models.JobOffer>
+
+@{
+    ViewData["Title"] = "My Job Offers";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<a asp-controller="Job" asp-action="Create" class="btn btn-primary float-end mb-3">Create New Job Offer</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Company</th>
+            <th>Location</th>
+            <th>Position</th>
+            <th>Published</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var offer in Model)
+        {
+            <tr>
+                <td>@offer.Title</td>
+                <td>@(offer.Description.Length > 50 ? offer.Description.Substring(0, 50) + "..." : offer.Description)</td>
+                <td>@offer.Company</td>
+                <td>@offer.Location</td>
+                <td>@offer.Position</td>
+                <td>@offer.PublishedDate.ToShortDateString()</td>
+                <td class="text-start">
+                    <a asp-controller="Job" asp-action="Edit" asp-route-id="@offer.Id" class="btn btn-sm text-primary">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+
+                    <a asp-controller="Job" asp-action="ViewCandidates" asp-route-id="@offer.Id" class="btn btn-sm text-primary ms-1">
+                        <i class="bi bi-eye"></i>
+                    </a>
+
+                    <a asp-controller="Job" asp-action="Delete" asp-route-id="@offer.Id" class="btn btn-sm text-danger ms-1">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
