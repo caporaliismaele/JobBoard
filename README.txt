@@ -1,70 +1,73 @@
-# 🧑‍💼 JobBoard - ASP.NET Core MVC Job Portal
+# JobBoard
 
-A full-stack web application developed with **ASP.NET Core MVC** that allows **Recruiters** to post and manage job offers, and **Candidates** to search, apply, and manage their applications. The project follows a clean architecture, role-based access, and simulates a real-world job board.
+Full-stack job board application built with ASP.NET Core MVC and SQL Server.
 
-## 🚀 Features
-
-### 🔒 Authentication & Authorization
-- User registration and login
-- Role-based access for `RECRUITER`, `CANDIDATE`, and `ADMIN`
-- Middleware that restricts access based on profile completion and recruiter approval
+The project allows recruiters to create and manage job offers, while candidates can apply their applications through a role-based platform designed to simulate common recruiting workflows.
 
 ---
 
-### 👤 Candidate Features
-- Complete profile with personal details and upload a **PDF CV**
-- Consent to privacy policy (mandatory)
-- Browse and search job offers by **position** and **location**
-- View job details in a side panel layout
-- Apply to job offers (only once per offer)
-- View personal application history (`My Applications`)
-- Update personal profile and replace CV (old CV automatically deleted)
+## Features
+
+- User authentication and role-based authorization with ASP.NET Identity
+- Recruiter and candidate profile management
+- Job offer creation and application workflows
+- PDF upload for CVs and recruiter verification documents
+- Admin approval system for recruiter accounts
+- Middleware-based profile completion enforcement
+- Access control based on user roles and approval status
 
 ---
 
-### 🧑‍💼 Recruiter Features
-- Complete profile with business and identity documents (PDF)
-- Consent to privacy policy (mandatory)
-- Recruiter profile must be **approved by admin** before accessing platform features
-- Manage only their own job offers
-- Create, edit, and delete job offers
-- Responsive table view with action buttons
-- View applicants for each job offer, including access to candidate details and CV
+## Technical Highlights
+
+- Role-based access control with ASP.NET Identity
+- Custom middleware for profile completion and workflow restrictions
+- File upload management with validation and cleanup
+- Recruiter approval flow with document handling
+- Structured MVC architecture with Entity Framework Core
+- Separation between candidate, recruiter, and admin workflows
 
 ---
 
-### 🛡️ Admin Features
-- Role assigned via **code seeding**
-- Dashboard for **approving or rejecting recruiter applications**
-- Ability to view submitted documents
-- On **rejection**, recruiter account and uploaded files are permanently deleted
+## Tech Stack
 
----
-
-## 🛠️ Technologies Used
-
+### Backend
 - ASP.NET Core MVC
-- Entity Framework Core + Code First Migrations
-- Identity for authentication & roles
-- Bootstrap 5 (for responsive UI)
-- SQL Server LocalDB
-- LINQ, Data Annotations
-- File Upload with validation and cleanup
+- Entity Framework Core
+- SQL Server
+- ASP.NET Identity
+
+### Frontend
+- Razor Views
+- Bootstrap 5
+
+### Additional Features
+- File upload handling
+- Middleware-based request interception
 
 ---
 
-## 🧪 How to Run Locally
+## Running the Project
 
-1. Clone the repo:
-   git clone https://github.com/caporaliismaele/JobBoard.git
-   cd jobboard
-
-2. Run migrations and start the project:
-   Update-Database -Context JobBoardContext
-   dotnet run
+```bash
+dotnet restore
+dotnet ef database update
+dotnet run
+```
 
 ---
 
-## 🙋‍♂️ Author
-Developed by Ismaele Caporali  
-Feel free to reach out on LinkedIn or by email (ismaelecaporali@gmail.com)!
+## Purpose of the Project
+
+The goal of the project was to simulate a real-world recruiting platform with:
+- authenticated users and role management
+- recruiter approval workflows
+- document upload and validation
+- job application management
+- controlled access to platform features
+
+---
+
+## Author
+
+Developed by Ismaele Caporali
